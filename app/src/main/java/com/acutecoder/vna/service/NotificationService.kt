@@ -1,16 +1,14 @@
 package com.acutecoder.vna.service
 
+import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.acutecoder.vna.core.VoiceEngine
+import com.acutecoder.vna.data.NotificationData
 import com.acutecoder.vna.ui.log
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flow
 
 /**
  * Created by Bhuvaneshwaran
@@ -34,7 +32,9 @@ class NotificationService : NotificationListenerService() {
         val title = extras.getString("android.title")
         val pack = sbn.packageName
 
-//        rankingMap.orderedKeys.forEach { key ->
+        val ticker = sbn.notification.tickerText?.toString()
+        val text = extras.getCharSequence("android.text")?.toString()
+
         val ranking = Ranking()
         rankingMap.getRanking(sbn.key, ranking)
 
@@ -43,26 +43,29 @@ class NotificationService : NotificationListenerService() {
                 && channel.importance != NotificationManager.IMPORTANCE_LOW
                 && channel.importance != NotificationManager.IMPORTANCE_MIN
 
-        map[pack] = map.getOrDefault(pack, NotificationData()).let {
-            it.copy(it.count + 1, it.alert || canAlert)
+        if (sbn.notification.flags.isCountable) {
+            map[pack].let {
+                if (it != null) {
+                    it.count += 1
+                    it.canAlert = it.canAlert || canAlert
+                } else map[pack] =
+                    NotificationData(
+                        count = 1,
+                        appName = sbn.appName(title),
+                        title = title,
+                        text = text,
+                        ticker = ticker,
+                        canAlert = canAlert
+                    )
+            }
         }
-//        }
 
-        map.log("map")
-        VoiceEngine.speak(map, pack, sbn.appName(title))
+        VoiceEngine.speak(map, pack)
 
-        val ticker = sbn.notification.tickerText?.toString()
-        val text = extras.getCharSequence("android.text")?.toString()
-
-//        sbn.notification.log("notification")
-//        if (sbn.notification.flags.isAlerting) {
-//            VoiceEngine.speak("Sir, there is a notification$app")
-//        }
-
-//        "Package: $pack".log("Service")
-//        "Title: $title".log("Service")
-//        "Text: $text".log("Service")
-//        "Ticker: $ticker".log("Service")
+        "Package: $pack".log("Service")
+        "Title: $title".log("Service")
+        "Text: $text".log("Service")
+        "Ticker: $ticker".log("Service")
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
@@ -70,9 +73,8 @@ class NotificationService : NotificationListenerService() {
         sbn?.let { map.remove(it.packageName) }
     }
 
-//    private val Int.isAlerting: Boolean
-//        get() = this and Notification.FLAG_ONGOING_EVENT == 0
-//                && this and Notification.FLAG_GROUP_SUMMARY == 0
+    private val Int.isCountable: Boolean
+        get() = this and Notification.FLAG_GROUP_SUMMARY == 0
 
     private fun StatusBarNotification.appName(defaultName: String?): String? {
         return try {
@@ -82,15 +84,4 @@ class NotificationService : NotificationListenerService() {
             defaultName
         }
     }
-}
-
-data class NotificationData(val count: Int = 0, val alert: Boolean = false) {
-    private var collector: FlowCollector<Int>? = null
-    private val flow: Flow<Int> = flow {
-        collector = this
-    }
-
-    suspend fun emit(value: Int) = collector?.emit(value)
-
-    suspend fun collect(block: (Int) -> Unit) = flow.collectLatest(block)
 }

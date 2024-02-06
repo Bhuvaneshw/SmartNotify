@@ -40,5 +40,5 @@ object Constants {
 
     //        const val TEMP = "Sir there \$count \$fromAppName, with title \$title stating \$text and with ticker \$ticker"
     const val DEFAULT_SPEAKING_FORMAT = "Sir there \$formattedCount \$fromAppName"
-    const val DEFAULT_SPEAKING_FORMAT_APPEND = ", \$formattedCountWOAre \$fromAppName"
+    const val DEFAULT_SPEAKING_FORMAT_APPEND = "\$formattedCountWOAre \$fromAppName"
 }

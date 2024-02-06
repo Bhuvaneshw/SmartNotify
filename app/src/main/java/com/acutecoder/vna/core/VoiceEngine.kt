@@ -19,7 +19,8 @@ object VoiceEngine : UtteranceProgressListener() {
     private var map: MutableMap<String, NotificationData> = mutableMapOf()
     private lateinit var speech: TextToSpeech
     private var ready = false
-    private var queue: MutableList<Triple<String, String, Boolean>>? = mutableListOf()
+    private val messages: MutableMap<String, Pair<String, Boolean>> = mutableMapOf()
+    private var queue: MutableList<String> = mutableListOf()
     private var isSpeaking = false
     private var speakingPack: String? = ""
     private lateinit var localStorage: LocalStorage
@@ -34,14 +35,7 @@ object VoiceEngine : UtteranceProgressListener() {
                     .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                     .build()
             )
-            queue?.let { queue ->
-                while (queue.size > 0) {
-                    val (msg, id, flush) = queue[0]
-                    speak(msg, id, flush)
-                    queue.removeAt(0)
-                }
-            }
-            queue = null
+            dispatchFirst()
         }
         speech.setOnUtteranceProgressListener(this)
     }
@@ -52,6 +46,37 @@ object VoiceEngine : UtteranceProgressListener() {
 
     override fun onDone(utteranceId: String?) {
         isSpeaking = false
+        dispatchFirst()
+    }
+
+    private fun dispatchFirst() {
+        if (queue.isNotEmpty()) {
+            val id = queue[0]
+            queue.removeAt(0)
+            if (!messages.containsKey(id)) {
+                dispatchFirst()
+                return
+            }
+
+            val (msg, flush) = messages[id]!!
+            messages.remove(id)
+            msg.log("Removed")
+            speak(
+                if (messages.isEmpty()) " and $msg" else msg,
+                id, flush
+            )
+        }
+    }
+
+    private fun enqueue(id: String, data: Pair<String, Boolean>) {
+        if (data.second) {
+            queue.removeIf {
+                it == data.first
+            }
+        }
+        messages[id] = data
+        queue.add(id)
+        data.first.log("Added")
     }
 
     @Deprecated("Deprecated in Java")
@@ -60,18 +85,19 @@ object VoiceEngine : UtteranceProgressListener() {
 
     private fun speak(msg: String, id: String, flush: Boolean = false) {
         if (ready) {
+            if (isSpeaking && speakingPack != id) {
+                enqueue(id, Pair(msg, flush))
+                return
+            }
             isSpeaking = true
+            speakingPack = id
             speech.speak(
                 msg.apply { log("Speaking") },
                 if (flush) TextToSpeech.QUEUE_FLUSH else TextToSpeech.QUEUE_ADD,
                 null,
                 id
             )
-        } else addOrCreateQueue(Triple(msg, id, flush))
-    }
-
-    private fun addOrCreateQueue(pair: Triple<String, String, Boolean>) {
-        if (queue == null) queue = mutableListOf(pair)
+        } else enqueue(id, Pair(msg, flush))
     }
 
     fun speak(map: MutableMap<String, NotificationData>, pack: String?) {
@@ -80,7 +106,6 @@ object VoiceEngine : UtteranceProgressListener() {
         val isFromSamePack = speakingPack == pack
         val flush = isSpeaking && isFromSamePack
 
-        speakingPack = pack
         if (msg?.canAlert == true) {
             val count =
                 if (msg.count == 1) "is a message"
@@ -116,7 +141,7 @@ private fun String.namedFormat(
     text: String,
     ticker: String
 ) =
-    replace("\$formattedCountWOAre",  if (count == 1) "a message" else "$count messages")
+    replace("\$formattedCountWOAre", if (count == 1) "a message" else "$count messages")
         .replace("\$formattedCount", formattedCount)
         .replace("\$fromAppName", from)
         .replace("\$title", title)

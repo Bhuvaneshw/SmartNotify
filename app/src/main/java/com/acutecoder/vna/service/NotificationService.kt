@@ -62,10 +62,10 @@ class NotificationService : NotificationListenerService() {
 
         VoiceEngine.speak(map, pack)
 
-        "Package: $pack".log("Service")
-        "Title: $title".log("Service")
-        "Text: $text".log("Service")
-        "Ticker: $ticker".log("Service")
+//        "Package: $pack".log("Service")
+//        "Title: $title".log("Service")
+//        "Text: $text".log("Service")
+//        "Ticker: $ticker".log("Service")
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {

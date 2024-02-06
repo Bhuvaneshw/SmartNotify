@@ -77,7 +77,8 @@ object VoiceEngine : UtteranceProgressListener() {
     fun speak(map: MutableMap<String, NotificationData>, pack: String?) {
         this.map = map
         val msg = map[pack]
-        val flush = isSpeaking && speakingPack == pack
+        val isFromSamePack = speakingPack == pack
+        val flush = isSpeaking && isFromSamePack
 
         speakingPack = pack
         if (msg?.canAlert == true) {
@@ -90,8 +91,16 @@ object VoiceEngine : UtteranceProgressListener() {
             }
 
             speak(
-                localStorage.speakingFormat
-                    .namedFormat(count, from, msg.title ?: "", msg.text ?: "", msg.ticker ?: ""),
+                (if (isSpeaking && !isFromSamePack)
+                    localStorage.speakingFormatAppend
+                else localStorage.speakingFormat).namedFormat(
+                    msg.count,
+                    count,
+                    from,
+                    msg.title ?: "",
+                    msg.text ?: "",
+                    msg.ticker ?: ""
+                ),
                 pack ?: "null",
                 flush
             )
@@ -100,13 +109,15 @@ object VoiceEngine : UtteranceProgressListener() {
 }
 
 private fun String.namedFormat(
-    count: String,
+    count: Int,
+    formattedCount: String,
     from: String,
     title: String,
     text: String,
     ticker: String
 ) =
-    replace("\$count", count)
+    replace("\$formattedCountWOAre",  if (count == 1) "a message" else "$count messages")
+        .replace("\$formattedCount", formattedCount)
         .replace("\$fromAppName", from)
         .replace("\$title", title)
         .replace("\$text", text)

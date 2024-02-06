@@ -23,4 +23,13 @@ class LocalStorage(context: Context) {
             preferences.edit().putString(Constants.KEY_SPEAKING_FORMAT, value).apply()
         }
 
+    var speakingFormatAppend: String
+        get() = preferences.getString(
+            Constants.KEY_SPEAKING_FORMAT_APPEND,
+            Constants.DEFAULT_SPEAKING_FORMAT_APPEND
+        )!!
+        set(value) {
+            preferences.edit().putString(Constants.KEY_SPEAKING_FORMAT_APPEND, value).apply()
+        }
+
 }

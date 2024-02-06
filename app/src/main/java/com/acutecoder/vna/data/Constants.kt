@@ -15,7 +15,7 @@ object Constants {
            |   ${DOLLAR}count -> represents count of the notification including a/are
            |       Ex: 
            |           Format:
-           |               There \${'$'}{dol}count message
+           |               There \${DOLLAR}count message
            |           Output:
            |               1. There is a message (when count equal to 0)
            |               2. There are 12 messages (when count not equal to 0)
@@ -36,7 +36,9 @@ object Constants {
            """.trimMargin()
 
     const val KEY_SPEAKING_FORMAT = "speaking_format"
+    const val KEY_SPEAKING_FORMAT_APPEND = "speaking_format_append"
 
     //        const val TEMP = "Sir there \$count \$fromAppName, with title \$title stating \$text and with ticker \$ticker"
-    const val DEFAULT_SPEAKING_FORMAT = "Sir there \$count \$fromAppName"
+    const val DEFAULT_SPEAKING_FORMAT = "Sir there \$formattedCount \$fromAppName"
+    const val DEFAULT_SPEAKING_FORMAT_APPEND = ", \$formattedCountWOAre \$fromAppName"
 }

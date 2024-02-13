@@ -1,4 +1,4 @@
-package com.acutecoder.vna.ui
+package com.acutecoder.smartnotify.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -17,9 +17,9 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import com.acutecoder.services.ai.ui.theme.ThemeColors
 import com.acutecoder.services.ai.ui.theme.VNATheme
-import com.acutecoder.vna.core.LocalStorage
-import com.acutecoder.vna.core.VoiceEngine
-import com.acutecoder.vna.screeen.NavGraphs
+import com.acutecoder.smartnotify.core.LocalStorage
+import com.acutecoder.smartnotify.core.VoiceEngine
+import com.acutecoder.smartnotify.screeen.NavGraphs
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {

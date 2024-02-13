@@ -1,4 +1,4 @@
-package com.acutecoder.vna.data
+package com.acutecoder.smartnotify.data
 
 /**
  * Created by Bhuvaneshwaran

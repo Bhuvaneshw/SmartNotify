@@ -1,7 +1,7 @@
-package com.acutecoder.vna.core
+package com.acutecoder.smartnotify.core
 
 import android.content.Context
-import com.acutecoder.vna.data.Constants
+import com.acutecoder.smartnotify.data.Constants
 
 /**
  * Created by Bhuvaneshwaran

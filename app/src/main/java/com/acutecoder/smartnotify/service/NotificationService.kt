@@ -1,4 +1,4 @@
-package com.acutecoder.vna.service
+package com.acutecoder.smartnotify.service
 
 import android.app.Notification
 import android.app.NotificationManager
@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import com.acutecoder.vna.core.VoiceEngine
-import com.acutecoder.vna.data.NotificationData
-import com.acutecoder.vna.ui.log
+import com.acutecoder.smartnotify.core.VoiceEngine
+import com.acutecoder.smartnotify.data.NotificationData
+import com.acutecoder.smartnotify.ui.log
 
 /**
  * Created by Bhuvaneshwaran

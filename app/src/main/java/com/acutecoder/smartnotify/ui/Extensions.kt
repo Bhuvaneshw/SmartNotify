@@ -1,4 +1,4 @@
-package com.acutecoder.vna.ui
+package com.acutecoder.smartnotify.ui
 
 import android.content.Context
 import android.util.Log

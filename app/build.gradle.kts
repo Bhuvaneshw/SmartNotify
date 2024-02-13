@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.acutecoder.vna"
+    namespace = "com.acutecoder.smartnotify"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.acutecoder.vna"
+        applicationId = "com.acutecoder.smartnotify"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

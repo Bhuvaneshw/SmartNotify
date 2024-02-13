@@ -1,4 +1,4 @@
-package com.acutecoder.vna
+package com.acutecoder.smartnotify
 
 import org.junit.Test
 

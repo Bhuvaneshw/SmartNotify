@@ -1,11 +1,11 @@
-package com.acutecoder.vna.core
+package com.acutecoder.smartnotify.core
 
 import android.content.Context
 import android.media.AudioAttributes
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
-import com.acutecoder.vna.data.NotificationData
-import com.acutecoder.vna.ui.log
+import com.acutecoder.smartnotify.data.NotificationData
+import com.acutecoder.smartnotify.ui.log
 
 /**
  * Created by Bhuvaneshwaran

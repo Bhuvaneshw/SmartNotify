@@ -1,4 +1,4 @@
-package com.acutecoder.vna.screeen
+package com.acutecoder.smartnotify.screeen
 
 import android.content.Context
 import android.content.Intent
@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.acutecoder.services.ai.ui.theme.ThemeColors
-import com.acutecoder.vna.data.Constants
-import com.acutecoder.vna.ui.LocalStorageProvider
-import com.acutecoder.vna.ui.toast
+import com.acutecoder.smartnotify.data.Constants
+import com.acutecoder.smartnotify.ui.LocalStorageProvider
+import com.acutecoder.smartnotify.ui.toast
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 

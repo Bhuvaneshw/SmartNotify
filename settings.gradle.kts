@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VNA"
+rootProject.name = "SmartNotify"
 include(":app")
  

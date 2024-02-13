@@ -1,4 +1,4 @@
-package com.acutecoder.services.ai.ui.theme
+package com.acutecoder.smartnotify.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -37,7 +37,7 @@ private val lightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun VNATheme(
+fun SmartNotifyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     lightStatusBar: Boolean = !darkTheme,
     content: @Composable () -> Unit

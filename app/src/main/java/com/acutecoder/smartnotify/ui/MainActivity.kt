@@ -15,8 +15,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
-import com.acutecoder.services.ai.ui.theme.ThemeColors
-import com.acutecoder.services.ai.ui.theme.VNATheme
+import com.acutecoder.smartnotify.ui.theme.ThemeColors
+import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
 import com.acutecoder.smartnotify.core.LocalStorage
 import com.acutecoder.smartnotify.core.VoiceEngine
 import com.acutecoder.smartnotify.screeen.NavGraphs
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
         val localStorage = LocalStorage(applicationContext)
         setContent {
-            VNATheme {
+            SmartNotifyTheme {
                 Surface(
                     modifier = Modifier
                         .background(ThemeColors.background)
@@ -56,4 +56,4 @@ class MainActivity : ComponentActivity() {
 }
 
 lateinit var LocalStorageProvider: ProvidableCompositionLocal<LocalStorage>
-    private set
+//    private set

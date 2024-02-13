@@ -108,8 +108,12 @@ object VoiceEngine : UtteranceProgressListener() {
 
         if (msg?.canAlert == true) {
             val count =
-                if (msg.count == 1) "is a message"
-                else "are ${msg.count} messages"
+                if (msg.count == 1) "a message"
+                else "${msg.count} messages"
+            val isOrAre =
+                if (msg.count == 1) "is"
+                else "are"
+
             val from = msg.appName.let {
                 if (it != null) " from $it"
                 else ""
@@ -117,9 +121,9 @@ object VoiceEngine : UtteranceProgressListener() {
 
             speak(
                 (if (isSpeaking && !isFromSamePack)
-                    localStorage.speakingFormatAppend
+                    localStorage.speakingMessage
                 else localStorage.speakingFormat).namedFormat(
-                    msg.count,
+                    isOrAre,
                     count,
                     from,
                     msg.title ?: "",
@@ -134,14 +138,14 @@ object VoiceEngine : UtteranceProgressListener() {
 }
 
 private fun String.namedFormat(
-    count: Int,
+    isOrAre: String,
     formattedCount: String,
     from: String,
     title: String,
     text: String,
     ticker: String
 ) =
-    replace("\$formattedCountWOAre", if (count == 1) "a message" else "$count messages")
+    replace("\$isOrAre", isOrAre)
         .replace("\$formattedCount", formattedCount)
         .replace("\$fromAppName", from)
         .replace("\$title", title)

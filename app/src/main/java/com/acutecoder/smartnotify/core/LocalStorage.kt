@@ -14,22 +14,25 @@ class LocalStorage(context: Context) {
 
     private val preferences = context.getSharedPreferences("preference", Context.MODE_PRIVATE)
 
-    var speakingFormat: String
+    var speakingPrefix: String
         get() = preferences.getString(
-            Constants.KEY_SPEAKING_FORMAT,
-            Constants.DEFAULT_SPEAKING_FORMAT
+            Constants.KEY_SPEAKING_PREFIX,
+            Constants.DEFAULT_SPEAKING_PREFIX
         )!!
         set(value) {
-            preferences.edit().putString(Constants.KEY_SPEAKING_FORMAT, value).apply()
+            preferences.edit().putString(Constants.KEY_SPEAKING_PREFIX, value).apply()
         }
 
-    var speakingFormatAppend: String
+    var speakingMessage: String
         get() = preferences.getString(
-            Constants.KEY_SPEAKING_FORMAT_APPEND,
-            Constants.DEFAULT_SPEAKING_FORMAT_APPEND
+            Constants.KEY_SPEAKING_MESSAGE,
+            Constants.DEFAULT_SPEAKING_MESSAGE
         )!!
         set(value) {
-            preferences.edit().putString(Constants.KEY_SPEAKING_FORMAT_APPEND, value).apply()
+            preferences.edit().putString(Constants.KEY_SPEAKING_MESSAGE, value).apply()
         }
+
+    val speakingFormat: String
+        get() = "$speakingPrefix $speakingMessage"
 
 }

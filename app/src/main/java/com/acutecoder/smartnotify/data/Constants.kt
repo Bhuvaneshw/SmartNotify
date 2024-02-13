@@ -12,21 +12,20 @@ object Constants {
     private const val DOLLAR = "$"
     val FORMATTING_FIELD_TEXT =
         """|Formatting Fields
-           |   ${DOLLAR}count -> represents count of the notification including a/are
-           |       Ex: 
-           |           Format:
-           |               There \${DOLLAR}count message
-           |           Output:
-           |               1. There is a message (when count equal to 0)
-           |               2. There are 12 messages (when count not equal to 0)
+           |   ${DOLLAR}formattedCount -> represents count of the notification including a/are
+           |       Ex:
+           |           1. a message
+           |           2. 11 messages
+           |
+           |   ${DOLLAR}isOrAre
+           |       Ex:
+           |           1. is
+           |           2. are
            |
            |   ${DOLLAR}fromAppName -> represents name of the app including from
            |       Ex: 
-           |           Format:
-           |               New message ${DOLLAR}fromAppName
-           |           Output:
-           |               1. New message from WhatsApp (if name found)
-           |               2. New message (if name not found)
+           |           1. from WhatsApp
+           |           2. from Telegram
            |
            |   ${DOLLAR}title -> The title of the notification
            |
@@ -35,10 +34,10 @@ object Constants {
            |   ${DOLLAR}ticker -> The ticker/summary of the notification
            """.trimMargin()
 
-    const val KEY_SPEAKING_FORMAT = "speaking_format"
-    const val KEY_SPEAKING_FORMAT_APPEND = "speaking_format_append"
+    const val KEY_SPEAKING_PREFIX = "speaking_prefix"
+    const val KEY_SPEAKING_MESSAGE = "speaking_message"
 
     //        const val TEMP = "Sir there \$count \$fromAppName, with title \$title stating \$text and with ticker \$ticker"
-    const val DEFAULT_SPEAKING_FORMAT = "Sir there \$formattedCount \$fromAppName"
-    const val DEFAULT_SPEAKING_FORMAT_APPEND = "\$formattedCountWOAre \$fromAppName"
+    const val DEFAULT_SPEAKING_PREFIX = "Sir there \$isOrAre"
+    const val DEFAULT_SPEAKING_MESSAGE = "\$formattedCount \$fromAppName"
 }

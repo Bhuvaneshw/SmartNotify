@@ -1,4 +1,4 @@
-package com.acutecoder.services.ai.ui.theme
+package com.acutecoder.smartnotify.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -17,7 +17,7 @@ open class Colors {
     open val light = Color.White
     open val primary = Color(0xFF0076d2)
     open val secondary = Color(0xffEFECFE)
-    open val tertiary = Color(0xFF8121E0)
+    open val tertiary = Color(0xFF0076d2)
     open val statusBar = Color(0xffF2F5FF)
     open val navigationBar = Color(0xffF2F5FF)
     open val background = Color(0xffF2F5FF)
@@ -35,7 +35,7 @@ object DarkColors : Colors() {
     override val light = Color(0xFF292E3C)
     override val primary = Color(0xFF367BB1)
     override val secondary = Color(0xFF252238)
-    override val tertiary = Color(0xFFB967F8)
+    override val tertiary = Color(0xFF367BB1)
     override val statusBar = Color(0xFF1E222E)
     override val navigationBar = Color(0xFF1E222E)
     override val background = Color(0xFF1E222E)

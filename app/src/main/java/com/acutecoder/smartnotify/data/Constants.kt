@@ -37,7 +37,6 @@ object Constants {
     const val KEY_SPEAKING_PREFIX = "speaking_prefix"
     const val KEY_SPEAKING_MESSAGE = "speaking_message"
 
-    //        const val TEMP = "Sir there \$count \$fromAppName, with title \$title stating \$text and with ticker \$ticker"
     const val DEFAULT_SPEAKING_PREFIX = "Sir there \$isOrAre"
     const val DEFAULT_SPEAKING_MESSAGE = "\$formattedCount \$fromAppName"
 }

@@ -8,7 +8,6 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.acutecoder.smartnotify.core.VoiceEngine
 import com.acutecoder.smartnotify.data.NotificationData
-import com.acutecoder.smartnotify.ui.log
 
 /**
  * Created by Bhuvaneshwaran
@@ -61,15 +60,9 @@ class NotificationService : NotificationListenerService() {
         }
 
         VoiceEngine.speak(map, pack)
-
-//        "Package: $pack".log("Service")
-//        "Title: $title".log("Service")
-//        "Text: $text".log("Service")
-//        "Ticker: $ticker".log("Service")
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        "Notification Removed".log("Service")
         sbn?.let { map.remove(it.packageName) }
     }
 

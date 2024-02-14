@@ -1,9 +1,5 @@
 package com.acutecoder.smartnotify.screeen
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +24,7 @@ import com.acutecoder.smartnotify.core.LocalStorage
 import com.acutecoder.smartnotify.data.Constants
 import com.acutecoder.smartnotify.ui.LabeledTextField
 import com.acutecoder.smartnotify.ui.LocalStorageProvider
+import com.acutecoder.smartnotify.ui.openNotificationListenerSettings
 import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
 import com.acutecoder.smartnotify.ui.theme.ThemeColors
 import com.acutecoder.smartnotify.ui.toast
@@ -80,19 +77,13 @@ fun MainScreen() {
             Text("Save", color = ThemeColors.white)
         }
 
-        Button(modifier = Modifier.fillMaxWidth(0.9f), onClick = { context.showSettings() }) {
+        Button(
+            modifier = Modifier.fillMaxWidth(0.9f),
+            onClick = { context.openNotificationListenerSettings() }
+        ) {
             Text("Settings", color = ThemeColors.white)
         }
     }
-}
-
-private fun Context.showSettings() {
-    startActivity(
-        Intent(
-            Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS,
-            Uri.parse("package:$packageName")
-        )
-    )
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)

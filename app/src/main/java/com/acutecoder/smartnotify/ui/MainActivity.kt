@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Surface
@@ -15,11 +16,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
-import com.acutecoder.smartnotify.ui.theme.ThemeColors
-import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
 import com.acutecoder.smartnotify.core.LocalStorage
 import com.acutecoder.smartnotify.core.VoiceEngine
 import com.acutecoder.smartnotify.screeen.NavGraphs
+import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
+import com.acutecoder.smartnotify.ui.theme.ThemeColors
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
                         .navigationBarsPadding()
                         .background(ThemeColors.light)
                         .statusBarsPadding()
+                        .imePadding()
                         .fillMaxSize(),
                     color = ThemeColors.background
                 ) {

@@ -108,11 +108,12 @@ object VoiceEngine : UtteranceProgressListener() {
 
         if (msg?.canAlert == true) {
             val count =
-                if (msg.count == 1) "a message"
-                else "${msg.count} messages"
+                if (msg.count == 1) "a"
+                else "${msg.count}"
             val isOrAre =
                 if (msg.count == 1) "is"
                 else "are"
+            val needS = msg.count != 1
 
             val from = msg.appName.let {
                 if (it != null) " from $it"
@@ -126,6 +127,7 @@ object VoiceEngine : UtteranceProgressListener() {
                     isOrAre,
                     count,
                     from,
+                    needS,
                     msg.title ?: "",
                     msg.text ?: "",
                     msg.ticker ?: ""
@@ -141,6 +143,7 @@ private fun String.namedFormat(
     isOrAre: String,
     formattedCount: String,
     from: String,
+    needS: Boolean,
     title: String,
     text: String,
     ticker: String
@@ -151,3 +154,4 @@ private fun String.namedFormat(
         .replace("\$title", title)
         .replace("\$text", text)
         .replace("\$ticker", ticker)
+        .replace("\$addSIfRequired", if (needS) "s" else "")

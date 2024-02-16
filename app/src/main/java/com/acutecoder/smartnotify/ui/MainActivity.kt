@@ -15,10 +15,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.acutecoder.smartnotify.core.LocalStorage
 import com.acutecoder.smartnotify.core.VoiceEngine
 import com.acutecoder.smartnotify.screeen.NavGraphs
+import com.acutecoder.smartnotify.service.NotificationService
 import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
 import com.acutecoder.smartnotify.ui.theme.ThemeColors
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -54,6 +58,20 @@ class MainActivity : ComponentActivity() {
         }
 
         VoiceEngine.init(this, localStorage)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        isServiceRunning = NotificationService.isActive(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isServiceRunning = NotificationService.isActive(this)
+    }
+
+    companion object {
+        var isServiceRunning by mutableStateOf(false)
     }
 }
 

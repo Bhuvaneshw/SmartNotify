@@ -2,6 +2,7 @@ package com.acutecoder.smartnotify.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
@@ -19,4 +20,8 @@ fun Context.toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).s
 
 fun Context.openNotificationListenerSettings() {
     startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+}
+
+fun Context.openLink(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }

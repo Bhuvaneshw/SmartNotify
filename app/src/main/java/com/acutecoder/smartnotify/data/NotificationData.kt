@@ -14,4 +14,15 @@ data class NotificationData(
     var text: String? = "",
     var ticker: String? = "",
     var canAlert: Boolean = false
-)
+) {
+    companion object {
+        fun sampleData(packageName: String, single: Boolean) =
+            mutableMapOf(
+                packageName to NotificationData(
+                    if (single) 1 else 2, "Smart Notify",
+                    "Sample title", "Sample description",
+                    "Sample title and description", true
+                )
+            )
+    }
+}

@@ -1,4 +1,4 @@
-package com.acutecoder.smartnotify.ui
+package com.acutecoder.smartnotify.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -46,14 +46,14 @@ fun LabeledTextField(
         modifier
             .height(IntrinsicSize.Max)
             .clip(RoundedCornerShape(8.dp))
-            .background(ThemeColors.primary.copy(alpha = 0.2f)),
+            .background(ThemeColors.primary.copy(alpha = 0.1f, red = 0f, green = 0.2f, blue = 1f)),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             Modifier
                 .fillMaxHeight()
                 .widthIn(min = 100.dp)
-                .background(ThemeColors.primary.copy(alpha = 0.2f))
+                .background(ThemeColors.primary.copy(alpha = 0.1f))
                 .padding(10.dp),
             verticalArrangement = Arrangement.Center
         ) {

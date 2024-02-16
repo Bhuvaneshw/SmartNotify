@@ -1,5 +1,6 @@
 package com.acutecoder.smartnotify.service
 
+import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
@@ -8,6 +9,7 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.acutecoder.smartnotify.core.VoiceEngine
 import com.acutecoder.smartnotify.data.NotificationData
+
 
 /**
  * Created by Bhuvaneshwaran
@@ -75,6 +77,32 @@ class NotificationService : NotificationListenerService() {
             packageManager.getApplicationLabel(appInfo) as String
         } catch (e: PackageManager.NameNotFoundException) {
             defaultName
+        }
+    }
+
+    companion object {
+
+        /**
+         * Reason for deprecation
+         * getRunningServices() will return caller's service as backward compatibility,
+         * which is enough for determining running state of this service
+         *
+         * Reason for warning
+         * the IDE is reporting that serviceClass.getName() is always not equal to
+         * service.className, but that is working as expected
+         */
+        @Suppress("deprecation", "warnings")
+        fun isActive(context: Context): Boolean {
+            val activityManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
+            val serviceClass = NotificationService::class.java
+
+            for (service in activityManager.getRunningServices(Int.MAX_VALUE)) {
+                if (serviceClass.getName() == service.service.className) {
+                    return true
+                }
+            }
+
+            return false
         }
     }
 }

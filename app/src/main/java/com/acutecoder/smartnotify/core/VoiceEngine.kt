@@ -25,10 +25,12 @@ object VoiceEngine : UtteranceProgressListener() {
     private var speakingPack: String? = ""
     private lateinit var localStorage: LocalStorage
 
-    fun init(context: Context, localStorage: LocalStorage) {
+    fun init(context: Context, localStorage: LocalStorage, callback: (Boolean) -> Unit) {
         this.localStorage = localStorage
         speech = TextToSpeech(context) {
-            ready = true
+            ready = it == TextToSpeech.SUCCESS
+            callback(ready)
+
             speech.setAudioAttributes(
                 AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)

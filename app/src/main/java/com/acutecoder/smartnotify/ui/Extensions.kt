@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.ui.Modifier
 
 /**
  * Created by Bhuvaneshwaran
@@ -25,3 +26,8 @@ fun Context.openNotificationListenerSettings() {
 fun Context.openLink(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }
+
+fun Modifier.on(condition: Boolean, other: Modifier.() -> Modifier) =
+    if (condition)
+        other()
+    else this

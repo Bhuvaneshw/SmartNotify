@@ -57,7 +57,9 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        VoiceEngine.init(this, localStorage)
+        VoiceEngine.init(this, localStorage) {
+            isVoiceEngineReady = it
+        }
     }
 
     override fun onStart() {
@@ -72,6 +74,7 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         var isServiceRunning by mutableStateOf(false)
+        var isVoiceEngineReady by mutableStateOf(false)
     }
 }
 

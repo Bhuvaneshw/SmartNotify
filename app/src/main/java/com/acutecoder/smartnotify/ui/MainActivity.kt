@@ -21,7 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.acutecoder.smartnotify.core.LocalStorage
 import com.acutecoder.smartnotify.core.VoiceEngine
-import com.acutecoder.smartnotify.screeen.NavGraphs
+import com.acutecoder.smartnotify.screen.NavGraphs
 import com.acutecoder.smartnotify.service.NotificationService
 import com.acutecoder.smartnotify.ui.theme.SmartNotifyTheme
 import com.acutecoder.smartnotify.ui.theme.ThemeColors

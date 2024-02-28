@@ -1,4 +1,4 @@
-package com.acutecoder.smartnotify.screeen
+package com.acutecoder.smartnotify.screen
 
 import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -18,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
@@ -135,6 +137,8 @@ private fun LazyListScope.homePage() {
     serviceStatus()
     verticalGap()
     voiceCheck()
+    verticalGap()
+    item { Text("For better performance set the default notification sound to Silent") }
 }
 
 private fun LazyListScope.templatePage(
@@ -165,8 +169,24 @@ private fun LazyListScope.templatePage(
 
 private fun LazyListScope.formattingFieldsPage() {
     titleItem("Formatting fields")
-    item {
-        Text(Constants.FORMATTING_FIELD_TEXT, Modifier.padding(12.dp))
+    items(Constants.FORMATTING_FIELD_TEXT) { info ->
+        Column(Modifier.padding(12.dp)) {
+            Text(
+                "$" + info.title,
+                Modifier.padding(bottom = 6.dp),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            info.description?.let { Text(it, Modifier.padding(start = 6.dp, bottom = 6.dp)) }
+
+            if (info.examples.isNotEmpty())
+                Text("Example", Modifier.padding(start = 6.dp), fontWeight = FontWeight.Bold)
+            info.examples.mapIndexed { index, example ->
+                Text((index + 1).toString() + ". " + example, Modifier.padding(start = 10.dp))
+            }
+
+            Divider(Modifier.padding(top = 8.dp))
+        }
     }
 }
 

@@ -11,36 +11,28 @@ object Constants {
 
     const val URL_WEBSITE = "https://acutecoder.netlify.app/projects/smartnotify"
 
-    private const val DOLLAR = "$"
     val FORMATTING_FIELD_TEXT =
-        """|${DOLLAR}formattedCount -> represents count of the notification
-           |    Ex:
-           |        1. a
-           |        2. 11
-           |
-           |${DOLLAR}isOrAre
-           |    Ex:
-           |        1. is
-           |        2. are
-           |
-           |${DOLLAR}addSIfRequired -> add the letter 's' for count not equal to 1
-           |    Sample:
-           |        message${DOLLAR}addSIfRequired
-           |    Ex:
-           |        1. message
-           |        2. messages
-           |
-           |${DOLLAR}fromAppName -> represents name of the app including from
-           |    Ex: 
-           |        1. from WhatsApp
-           |        2. from Telegram
-           |
-           |${DOLLAR}title -> The title of the notification
-           |
-           |${DOLLAR}text -> The text/description of the notification
-           |
-           |${DOLLAR}ticker -> The ticker/summary of the notification
-           """.trimMargin()
+        listOf(
+            FieldInfo("formattedCount", "represents count of the notification", "a", "11"),
+            FieldInfo("isOrAre", null, "is", "are"),
+            FieldInfo(
+                "addSIfRequired",
+                "add the letter 's' for count not equal to 1\n" +
+                        "Sample format:\n" +
+                        "message\$addSIfRequired",
+                "message",
+                "messages"
+            ),
+            FieldInfo(
+                "fromAppName",
+                "represents name of the app including \"from\"",
+                "from WhatsApp",
+                "from Telegram"
+            ),
+            FieldInfo("title", "The title of the notification"),
+            FieldInfo("text", "The text/description of the notification"),
+            FieldInfo("ticker", "The ticker/summary of the notification"),
+        )
 
     const val KEY_SPEAKING_PREFIX = "speaking_prefix"
     const val KEY_SPEAKING_MESSAGE = "speaking_message"

@@ -5,3 +5,6 @@ An Android app that speaks the notification content based on the given Template.
 ## Screenshots
   <img src="screenshots/Screenshot_1.png" width="200"/>  <img src="screenshots/Screenshot_2.png" width="200"/>
   <img src="screenshots/Screenshot_3.png" width="200"/> 
+
+## Release app
+  [Download Smart Notify V1.0](app/release/app-release.apk)
